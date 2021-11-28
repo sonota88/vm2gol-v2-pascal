@@ -18,7 +18,7 @@ MAX_ID_UTILS=1
 MAX_ID_JSON=8
 MAX_ID_LEX=3
 MAX_ID_PARSE=2
-MAX_ID_COMPILE=29
+MAX_ID_COMPILE=26
 
 ERRS=""
 
@@ -240,11 +240,11 @@ test_parse() {
 test_compile_do_skip() {
   local nn="$1"; shift
 
-  for skip_nn in 26 27 28; do
-    if [ "$nn" = "$skip_nn" ]; then
-      return 0
-    fi
-  done
+  # for skip_nn in 26 ; do
+  #   if [ "$nn" = "$skip_nn" ]; then
+  #     return 0
+  #   fi
+  # done
 
   return 1
 }
@@ -263,10 +263,10 @@ test_compile_nn() {
   local temp_vgt_file="${TEMP_DIR}/test.vgt.json"
   local temp_vga_file="${TEMP_DIR}/test.vga.txt"
   local local_errs=""
-  local exp_file="${TEST_DIR}/compile/exp_${nn}.vga.txt"
+  local exp_file="${TEST_COMMON_DIR}/compile/exp_${nn}.vga.txt"
 
   echo "  lex" >&2
-  run_lex ${TEST_DIR}/compile/${nn}.vg.txt \
+  run_lex ${TEST_COMMON_DIR}/compile/${nn}.vg.txt \
     > $temp_tokens_file
   if [ $? -ne 0 ]; then
     ERRS="${ERRS},${nn}_lex"
