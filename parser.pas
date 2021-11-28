@@ -132,46 +132,35 @@ begin
                 );
 end;
 
-function _parseExprRight(var op : string; var rhs : PNode) : boolean;
-begin
-   op := peek(0)^.value;
-   if _isBinOp(op) then
-      begin
-         incPos;
-         rhs := parseExpr;
-         _parseExprRight := true;
-      end
-   else
-      _parseExprRight := false;
-end;
-
 function parseExpr() : PNode;
 var
-   lhs       : PNode;
+   expr      : PNode;
    rhs       : PNode;
    op        : string;
-   binOpList : PList;
-   binOpNode : PNode;
-   rhsExists : boolean;
+   tempList  : PList;
+   tempNode  : PNode;
 begin
    printFnName('parseExpr');
-   lhs := _parseExprFactor;
+   expr := _parseExprFactor;
 
-   rhsExists := _parseExprRight(op, rhs);
+   while _isBinOp(peek(0)^.value) do
+   begin
+      op := peek(0)^.value;
+      incPos;
+      rhs := _parseExprFactor;
 
-   if rhsExists then
-      begin
-         List_init(binOpList);
-         List_addStr(binOpList, op);
-         List_add(binOpList, lhs);
-         List_add(binOpList, rhs);
+      List_init(tempList);
+      List_addStr(tempList, op);
+      List_add(tempList, expr);
+      List_add(tempList, rhs);
 
-         Node_initList(binOpNode, binOpList);
+      Node_initList(tempNode, tempList);
 
-         parseExpr := binOpNode;
-      end
-   else
-      parseExpr := lhs;
+      expr := tempNode;
+   end
+   ;
+
+   parseExpr := expr
 end;
 
 function parseSet() : PList;
