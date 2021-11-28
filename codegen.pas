@@ -289,7 +289,6 @@ var
    labelId          : integer;
    whenIdx          : integer = -1;
    labelEnd         : string;
-   labelWhenHead    : string;
    labelEndWhenHead : string;
    i                : integer = 2;
    whenClause       : PList;
@@ -298,7 +297,6 @@ begin
    labelId := getNextLabelId;
 
    labelEnd := 'end_case_' + IntToStr(labelId);
-   labelWhenHead := 'when_' + IntToStr(labelId);
    labelEndWhenHead := 'end_when_' + IntToStr(labelId);
 
    while i <= List_size(stmt) do
@@ -308,11 +306,9 @@ begin
 
       genExpr(fnArgNames, lvarNames, List_get(whenClause, 1));
 
-      writeln('  cp 1 reg_b');
+      writeln('  cp 0 reg_b');
       writeln('  compare');
-      writeln('  jump_eq ', labelWhenHead, '_', whenIdx);
-      writeln('  jump ', labelEndWhenHead, '_', whenIdx);
-      writeln('label ', labelWhenHead, '_', whenIdx);
+      writeln('  jump_eq ', labelEndWhenHead, '_', whenIdx);
 
       genStmts(fnArgNames, lvarNames, List_rest(whenClause));
 
