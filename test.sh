@@ -196,10 +196,10 @@ test_parse_nn() {
 
   echo "case ${nn}"
 
-  local input_file="${TEST_DIR}/parse/${nn}.vg.txt"
+  local input_file="${TEST_COMMON_DIR}/parse/${nn}.vg.txt"
   local temp_tokens_file="${TEMP_DIR}/test.tokens.txt"
   local temp_vgt_file="${TEMP_DIR}/test.vgt.json"
-  local exp_file="${TEST_DIR}/parse/exp_${nn}.vgt.json"
+  local exp_file="${TEST_COMMON_DIR}/parse/exp_${nn}.vgt.json"
 
   echo "  lex" >&2
   run_lex $input_file > $temp_tokens_file
