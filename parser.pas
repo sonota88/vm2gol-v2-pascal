@@ -299,6 +299,7 @@ var
 begin
    List_init(whenClause);
 
+   consume('when');
    consume('(');
    condExpr := parseExpr;
    consume(')');
@@ -321,12 +322,9 @@ begin
    List_addStr(stmt, 'case');
 
    consume('case');
-   consume('{');
 
-   while peek(0)^.value <> '}' do
+   while peek(0)^.value = 'when' do
       List_addList(stmt, _parseWhenClause);
-
-   consume('}');
 
    parseCase := stmt;
 end;

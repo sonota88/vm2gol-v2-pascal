@@ -16,6 +16,7 @@ begin
             or (s = 'return')
             or (s = 'while')
             or (s = 'case')
+            or (s = 'when')
             or (s = '_cmt')
             );
 end;
