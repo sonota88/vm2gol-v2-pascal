@@ -162,9 +162,9 @@ test_lex_nn() {
 
   echo "case ${nn}"
 
-  local input_file="${TEST_DIR}/lex/${nn}.vg.txt"
+  local input_file="${TEST_COMMON_DIR}/lex/${nn}.vg.txt"
   local temp_tokens_file="${TEMP_DIR}/test.tokens.txt"
-  local exp_file="${TEST_DIR}/lex/exp_${nn}.txt"
+  local exp_file="${TEST_COMMON_DIR}/lex/exp_${nn}.txt"
 
   run_lex $input_file > $temp_tokens_file
   if [ $? -ne 0 ]; then
