@@ -11,10 +11,11 @@ print_project_dir() {
 
 readonly PROJECT_DIR="$(print_project_dir)"
 readonly TEST_DIR="${PROJECT_DIR}/test"
+readonly TEST_COMMON_DIR="${PROJECT_DIR}/test_common"
 readonly TEMP_DIR="${PROJECT_DIR}/z_tmp"
 
 MAX_ID_UTILS=1
-MAX_ID_JSON=7
+MAX_ID_JSON=8
 MAX_ID_LEX=3
 MAX_ID_PARSE=2
 MAX_ID_COMPILE=29
@@ -127,9 +128,9 @@ test_json_nn() {
 
   echo "case ${nn}"
 
-  local input_file="${TEST_DIR}/json/${nn}.json"
+  local input_file="${TEST_COMMON_DIR}/json/${nn}.json"
   local temp_json_file="${TEMP_DIR}/test.json"
-  local exp_file="${TEST_DIR}/json/${nn}.json"
+  local exp_file="${TEST_COMMON_DIR}/json/${nn}.json"
 
   run_test_json $input_file > $temp_json_file
   if [ $? -ne 0 ]; then
