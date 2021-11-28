@@ -368,7 +368,7 @@ begin
    else if t^.value = '_cmt'     then parseStmt := parseVmComment
    else
       begin
-         writeln(stderr, 'unexpected token (', t^.value, ')');
+         writeln(stderr, 'parseStmt: unexpected token (', t^.value, ') lineno (', t^.lineno, ')');
          halt(1);
       end;   
 end;
