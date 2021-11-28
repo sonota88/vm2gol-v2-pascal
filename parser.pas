@@ -90,7 +90,7 @@ begin
    _parseArgs := args
 end;
 
-function _parseExprLeft() : PNode;
+function _parseExprFactor() : PNode;
 var
    expr : PNode;
    t    : PToken;
@@ -101,23 +101,23 @@ begin
       begin
          Node_initInt(expr, StrToInt(t^.value));
          incPos;
-         _parseExprLeft := expr;
+         _parseExprFactor := expr;
       end
    else if t^.kind = 'ident' then
       begin
          Node_initStr(expr, t^.value);
          incPos;
-         _parseExprLeft := expr;
+         _parseExprFactor := expr;
       end
    else if t^.kind = 'sym' then
       begin
          consume('(');
-         _parseExprLeft := parseExpr;
+         _parseExprFactor := parseExpr;
          consume(')');
       end
    else
       begin
-         writeln(stderr, '_parseExprLeft: unexpected token kind');
+         writeln(stderr, '_parseExprFactor: unexpected token kind');
          halt(1);
       end;
 end;
@@ -155,7 +155,7 @@ var
    rhsExists : boolean;
 begin
    printFnName('parseExpr');
-   lhs := _parseExprLeft;
+   lhs := _parseExprFactor;
 
    rhsExists := _parseExprRight(op, rhs);
 
