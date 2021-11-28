@@ -258,7 +258,6 @@ var
    body       : PList;
    labelBegin : string;
    labelEnd   : string;
-   labelTrue  : string;
 begin
    printFnName('genWhile');
 
@@ -269,18 +268,14 @@ begin
 
    labelBegin := 'while_' + IntToStr(labelId);
    labelEnd := 'end_while_' + IntToStr(labelId);
-   labelTrue := 'true_' + IntToStr(labelId);
 
    writeln('label ', labelBegin);
 
    genExpr(fnArgNames, lvarNames, condExpr);
 
-   writeln('  cp 1 reg_b');
+   writeln('  cp 0 reg_b');
    writeln('  compare');
-   writeln('  jump_eq ', labelTrue);
-   writeln('  jump ', labelEnd);
-
-   writeln('label ', labelTrue);
+   writeln('  jump_eq ', labelEnd);
 
    genStmts(fnArgNames, lvarNames, body);
 
